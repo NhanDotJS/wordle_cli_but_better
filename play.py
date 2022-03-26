@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from mimetypes import guess_all_extensions
 import random
 import wordle
 
@@ -43,7 +42,33 @@ def takeUserInput():
             return guess
 
 
-game = wordle.WordleGame(random.choice(validWordList), validWordList)
+# game = wordle.WordleGame(random.choice(validWordList), validWordList)
+game = wordle.WordleGame("nolos", validWordList)
+game.printOutput()
 
 while game.checkGameCondition() == 'Ongoing':
     result = game.guess(takeUserInput())
+    game.printOutput()
+    if result == "Won":
+        print('''
+__   _______ _   _   _    _  _____ _   _ 
+\ \ / /  _  | | | | | |  | ||  _  | \ | |
+ \ V /| | | | | | | | |  | || | | |  \| |
+  \ / | | | | | | | | |/\| || | | | . ` |
+  | | \ \_/ / |_| | \  /\  /\ \_/ / |\  |
+  \_/  \___/ \___/   \/  \/  \___/\_| \_/
+                                         
+                                         ''')  # noqa
+        break
+    elif result == "Lost":
+        print('''
+__   _______ _   _   _     _____ _____ _____ 
+\ \ / /  _  | | | | | |   |  _  /  ___|_   _|
+ \ V /| | | | | | | | |   | | | \ `--.  | |  
+  \ / | | | | | | | | |   | | | |`--. \ | |  
+  | | \ \_/ / |_| | | |___\ \_/ /\__/ / | |  
+  \_/  \___/ \___/  \_____/\___/\____/  \_/  
+                                             
+                                         ''')  # noqa
+        print(f'The word is: {game.answer}')
+        break
